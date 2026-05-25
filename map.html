@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Travel with iQlipse | Explore Dream Destinations</title>
+    <!-- Tailwind + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS & JS (OpenStreetMap - NO API KEY NEEDED, fully functional) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Marker Cluster (for grouping markers) -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .filter-btn {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .filter-btn.active {
+            background-color: #3B82F6 !important;
+            color: white !important;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+        }
+        #chatMessages::-webkit-scrollbar {
+            width: 5px;
+        }
+        #chatMessages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .leaflet-popup-content-wrapper {
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-content {
+            margin: 12px 16px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .custom-marker {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-bed text-blue-500 text-2xl"></i>
+                    <span class="text-xl font-bold text-gray-800 tracking-tight">Travel with iQlipse</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition font-medium">Destinations</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition font-medium">Packages</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition font-medium">Contact</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-600 text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-2">
+            <a href="#" class="block py-2 text-gray-700">Destinations</a>
+            <a href="#" class="block py-2 text-gray-700">Packages</a>
+            <a href="#" class="block py-2 text-gray-700">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero + Map Section -->
+    <section class="py-10 lg:py-14 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-3">Explore <span class="text-blue-600">Your Next Adventure</span></h1>
+            <p class="text-gray-500 text-lg max-w-2xl mx-auto">Click on any marker to discover travel details and chat with our experts</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Map Container (Leaflet) -->
+            <div class="lg:w-2/3 w-full rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-100">
+                <div id="map" style="height: 550px; width: 100%; z-index: 1;"></div>
+            </div>
+
+            <!-- Side Panel -->
+            <div class="lg:w-1/3 w-full bg-white rounded-2xl shadow-xl p-5 flex flex-col">
+                <!-- Search & Filter -->
+                <div class="mb-5">
+                    <div class="relative mb-4">
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Search destination (e.g., Bali, Paris)..." 
+                               class="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition shadow-sm">
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm font-semibold text-gray-600 mr-1 self-center">Filter:</span>
+                        <button data-type="all" class="filter-btn active px-4 py-1.5 text-sm rounded-full bg-blue-600 text-white font-medium">All</button>
+                        <button data-type="beach" class="filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">🏖️ Beach</button>
+                        <button data-type="mountain" class="filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">⛰️ Mountain</button>
+                        <button data-type="city" class="filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">🏙️ City</button>
+                        <button data-type="adventure" class="filter-btn px-4 py-1.5 text-sm rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200">🧗 Adventure</button>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="flex flex-col items-center justify-center text-center py-12 bg-gray-50 rounded-xl mt-2">
+                    <i class="fas fa-globe-asia text-gray-300 text-5xl mb-3"></i>
+                    <p class="text-gray-500 font-medium">Select a destination on the map</p>
+                    <p class="text-gray-400 text-sm mt-1">Click any pin for travel info & deals</p>
+                </div>
+
+                <!-- Destination Details Panel (Hidden initially) -->
+                <div id="detailsPanel" class="hidden flex-col animate-fade-in">
+                    <div class="flex justify-between items-start border-b pb-2 mb-3">
+                        <h3 id="destName" class="text-2xl font-bold text-gray-800 leading-tight"></h3>
+                        <button id="closeDetails" class="text-gray-400 hover:text-red-500 transition text-xl"><i class="fas fa-times-circle"></i></button>
+                    </div>
+                    <img id="destImage" src="" alt="destination" class="w-full h-48 object-cover rounded-xl shadow-md mb-4">
+                    <p id="destDesc" class="text-gray-600 text-sm leading-relaxed mb-3"></p>
+                    <div class="grid grid-cols-2 gap-3 bg-gray-50 p-3 rounded-xl mb-4">
+                        <div><i class="fas fa-dollar-sign text-green-600"></i> <span id="destPrice" class="font-semibold">—</span></div>
+                        <div><i class="fas fa-clock text-blue-500"></i> <span id="destDuration" class="font-semibold">—</span></div>
+                        <div><i class="fas fa-tag text-purple-500"></i> <span id="destType" class="capitalize font-medium"></span></div>
+                        <div><i class="fas fa-star text-yellow-500"></i> <span id="destRating" class="font-medium">4.8 ★</span></div>
+                    </div>
+                    <button id="chatExpertBtn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fas fa-headset"></i> Chat with Travel Expert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 shadow-2xl animate-fade-in">
+            <div class="bg-blue-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
+                <div class="flex items-center gap-2"><i class="fas fa-comment-dots text-xl"></i><h3 class="font-bold text-lg">iQlipse Expert Chat</h3></div>
+                <button id="closeChatModal" class="text-white hover:text-gray-200 text-xl"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-4">
+                <div id="chatMessages" class="h-80 overflow-y-auto bg-gray-50 rounded-xl p-3 space-y-3 mb-4"></div>
+                <div class="flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Ask about hotels, flights, or best season..." class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-400 outline-none">
+                    <button id="sendChatMsg" class="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-xl transition"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <p class="text-xs text-gray-400 mt-3 text-center">💬 AI assistant + human expert reply within minutes</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <div class="flex justify-center gap-2 mb-2 md:mb-0"><i class="fas fa-bed text-blue-400"></i><span>Travel with iQlipse</span></div>
+            <div class="text-gray-400 text-sm">© 2025 Premium Travel Experiences — Explore Smarter</div>
+        </div>
+    </footer>
+
+    <script>
+        // ---------- DESTINATION DATABASE (Rich Data) ----------
+        const destinations = [
+            { id: 1, name: "Bali, Indonesia", type: "beach", lat: -8.4095, lng: 115.1889, image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&auto=format", description: "Lush jungles, stunning rice terraces, vibrant culture, and world-class surf breaks.", price: "$899", duration: "7-14 days", rating: 4.9 },
+            { id: 2, name: "Paris, France", type: "city", lat: 48.8566, lng: 2.3522, image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&auto=format", description: "The City of Light: Eiffel Tower, Louvre, charming cafés, and romantic Seine cruises.", price: "$1,299", duration: "5-7 days", rating: 4.8 },
+            { id: 3, name: "Swiss Alps, Switzerland", type: "mountain", lat: 46.7986, lng: 8.2320, image: "https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=600&auto=format", description: "Breathtaking peaks, scenic train rides, skiing, and charming alpine villages.", price: "$1,499", duration: "7-10 days", rating: 4.9 },
+            { id: 4, name: "Santorini, Greece", type: "beach", lat: 36.3932, lng: 25.4615, image: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?w=600&auto=format", description: "Iconic white & blue domes, volcanic beaches, and unforgettable sunsets.", price: "$1,199", duration: "5-7 days", rating: 4.9 },
+            { id: 5, name: "Tokyo, Japan", type: "city", lat: 35.6762, lng: 139.6503, image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&auto=format", description: "Futuristic city meets ancient temples, incredible sushi, and vibrant pop culture.", price: "$1,599", duration: "7-10 days", rating: 4.9 },
+            { id: 6, name: "Patagonia, Chile", type: "adventure", lat: -51.6226, lng: -72.3407, image: "https://images.unsplash.com/photo-1582972236019-ea9eaf1f6ddb?w=600&auto=format", description: "Glaciers, jagged mountains, pristine lakes – a trekker's paradise.", price: "$1,899", duration: "10-14 days", rating: 4.8 },
+            { id: 7, name: "Cape Town, South Africa", type: "adventure", lat: -33.9249, lng: 18.4241, image: "https://images.unsplash.com/photo-1580060839136-85e44f1a4b8e?w=600&auto=format", description: "Table Mountain, penguins, vibrant waterfront & stunning coastal drives.", price: "$1,099", duration: "6-9 days", rating: 4.7 },
+            { id: 8, name: "Banff, Canada", type: "mountain", lat: 51.1784, lng: -115.5708, image: "https://images.unsplash.com/photo-1536637706725-c96e8837d5b4?w=600&auto=format", description: "Turquoise lakes, rugged peaks, wildlife, and outdoor adventures.", price: "$1,299", duration: "5-8 days", rating: 4.9 },
+            { id: 9, name: "New York City, USA", type: "city", lat: 40.7128, lng: -74.0060, image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&auto=format", description: "Times Square, Central Park, Broadway – endless energy & iconic landmarks.", price: "$1,199", duration: "4-6 days", rating: 4.7 },
+            { id: 10, name: "Maldives", type: "beach", lat: 3.2028, lng: 73.2207, image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&auto=format", description: "Overwater bungalows, crystal clear water, luxury escape.", price: "$2,199", duration: "5-7 days", rating: 5.0 },
+            { id: 11, name: "Queenstown, New Zealand", type: "adventure", lat: -45.0312, lng: 168.6626, image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&auto=format", description: "Bungee jumping, skydiving, jet boating – adventure capital of the world.", price: "$1,699", duration: "7-9 days", rating: 4.9 }
+        ];
+
+        // ---------- LEAFLET MAP INIT (No API Key Required) ----------
+        let map;
+        let markersLayer = L.markerClusterGroup();  // cluster group for better UX
+        let allMarkers = [];
+        let currentPopup = null;
+        let selectedDestId = null;
+        
+        // Custom marker icons based on type
+        function getMarkerIcon(type) {
+            const iconColors = {
+                beach: '#FF6B6B',
+                mountain: '#4ECDC4',
+                city: '#FFD166',
+                adventure: '#6C63FF'
+            };
+            const color = iconColors[type] || '#3B82F6';
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="30" height="36">
+                <path fill="${color}" stroke="#fff" stroke-width="1.5" d="M12 0C5.4 0 0 5.4 0 12c0 7.5 12 24 12 24s12-16.5 12-24c0-6.6-5.4-12-12-12z"/>
+                <circle fill="#fff" cx="12" cy="12" r="4"/>
+            </svg>`;
+            const url = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+            return L.icon({
+                iconUrl: url,
+                iconSize: [28, 36],
+                iconAnchor: [14, 36],
+                popupAnchor: [0, -30]
+            });
+        }
+
+        function initMap() {
+            map = L.map('map').setView([20, 10], 2);
+            // Beautiful tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB',
+                subdomains: 'abcd',
+                maxZoom: 19,
+                minZoom: 2
+            }).addTo(map);
+            
+            renderMarkers('all');
+        }
+        
+        // Render markers based on filter
+        function renderMarkers(filterType) {
+            markersLayer.clearLayers();
+            allMarkers = [];
+            
+            const filtered = destinations.filter(d => filterType === 'all' || d.type === filterType);
+            
+            filtered.forEach(dest => {
+                const marker = L.marker([dest.lat, dest.lng], { icon: getMarkerIcon(dest.type) });
+                marker.bindPopup(`
+                    <div style="font-family: system-ui; min-width: 180px;">
+                        <h4 style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;">${dest.name}</h4>
+                        <p style="font-size: 0.75rem; color: #4b5563;">${dest.tag || dest.type} · ${dest.price}</p>
+                        <button class="view-detail-btn" data-id="${dest.id}" style="background: #3B82F6; color: white; border: none; border-radius: 30px; padding: 4px 12px; margin-top: 6px; font-size: 0.7rem; cursor: pointer; width: 100%;">✨ View Details</button>
+                    </div>
+                `, { className: 'custom-popup' });
+                
+                marker.on('popupopen', () => {
+                    // attach event after popup is added to DOM
+                    setTimeout(() => {
+                        const btn = document.querySelector(`.view-detail-btn[data-id="${dest.id}"]`);
+                        if (btn && !btn.hasClickListener) {
+                            btn.hasClickListener = true;
+                            btn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                showDestinationDetails(dest);
+                                map.closePopup();
+                            });
+                        }
+                    }, 50);
+                });
+                
+                marker.on('click', () => {
+                    showDestinationDetails(dest);
+                });
+                
+                marker.destinationData = dest;
+                markersLayer.addLayer(marker);
+                allMarkers.push(marker);
+            });
+            
+            map.addLayer(markersLayer);
+        }
+        
+        // Show details in side panel
+        function showDestinationDetails(dest) {
+            const emptyDiv = document.getElementById('emptyState');
+            const detailsDiv = document.getElementById('detailsPanel');
+            emptyDiv.classList.add('hidden');
+            detailsDiv.classList.remove('hidden');
+            
+            document.getElementById('destName').innerText = dest.name;
+            document.getElementById('destImage').src = dest.image;
+            document.getElementById('destDesc').innerText = dest.description;
+            document.getElementById('destPrice').innerText = dest.price;
+            document.getElementById('destDuration').innerText = dest.duration;
+            document.getElementById('destType').innerText = dest.type;
+            document.getElementById('destRating').innerHTML = `${dest.rating} ★`;
+            
+            // store current destination ID for chat context
+            detailsDiv.setAttribute('data-current-dest', JSON.stringify({ id: dest.id, name: dest.name }));
+            selectedDestId = dest.id;
+            
+            // Fly to marker on map
+            const targetMarker = allMarkers.find(m => m.destinationData?.id === dest.id);
+            if (targetMarker) {
+                map.flyTo(targetMarker.getLatLng(), 8, { duration: 1.2 });
+            }
+        }
+        
+        // Search function
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (!query) return;
+            const found = destinations.find(d => d.name.toLowerCase().includes(query));
+            if (found) {
+                showDestinationDetails(found);
+                // also update filter button to match type for consistency but not required
+            } else {
+                alert('Destination not found. Try: Bali, Paris, Tokyo, etc.');
+            }
+        }
+        
+        // ---------- CHAT LOGIC (Smart AI Replies) ----------
+        let currentChatDest = { name: "this destination" };
+        
+        async function openChatWithContext(destName) {
+            const modal = document.getElementById('chatModal');
+            const msgsDiv = document.getElementById('chatMessages');
+            const token = localStorage.getItem('token');
+            
+            currentChatDest = { name: destName };
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            if (token) {
+                // Fetch historical chat from server
+                msgsDiv.innerHTML = `<div class="text-center py-4 text-xs text-gray-400"><i class="fas fa-spinner fa-spin mr-1"></i> Loading conversation history...</div>`;
+                try {
+                    const response = await fetch(`/api/chat/history?destName=${encodeURIComponent(destName)}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok && data.chat && data.chat.messages && data.chat.messages.length > 0) {
+                        msgsDiv.innerHTML = '';
+                        data.chat.messages.forEach(msg => {
+                            const wrapper = document.createElement('div');
+                            if (msg.sender === 'user') {
+                                wrapper.className = 'flex justify-end mb-3';
+                                wrapper.innerHTML = `<div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow"><p class="text-sm">${escapeHtml(msg.text)}</p></div>`;
+                            } else {
+                                wrapper.className = 'flex items-start mb-3';
+                                wrapper.innerHTML = `<div class="bg-gray-100 text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm"><i class="fas fa-robot text-blue-500 mr-1"></i> <strong>AI Concierge:</strong> ${msg.text}</div>`;
+                            }
+                            msgsDiv.appendChild(wrapper);
+                        });
+                        msgsDiv.scrollTop = msgsDiv.scrollHeight;
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Failed to load chat history:', error);
+                }
+            }
+            
+            // Fallback default message if guest or no history
+            msgsDiv.innerHTML = `
+                <div class="flex items-start mb-3">
+                    <div class="bg-blue-100 text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm">
+                        <i class="fas fa-user-tie text-blue-600 mr-1"></i> <strong>Travel Expert:</strong> Hello! I'm your iQlipse travel specialist for <span class="font-semibold">${destName}</span>. Ask me anything: best hotels, local food, flight deals, or custom itineraries!
+                    </div>
+                </div>
+                <div class="flex items-start mb-2">
+                    <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-sm text-gray-600">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-1"></i> Pro tip: Tell me your budget & travel dates for personalized suggestions.
+                    </div>
+                </div>
+            `;
+            msgsDiv.scrollTop = msgsDiv.scrollHeight;
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const chatBox = document.getElementById('chatMessages');
+            
+            // Append user message
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'flex justify-end mb-3';
+            userMsgDiv.innerHTML = `<div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow"><p class="text-sm">${escapeHtml(msg)}</p></div>`;
+            chatBox.appendChild(userMsgDiv);
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            const token = localStorage.getItem('token');
+            const dest = currentChatDest.name;
+            
+            if (token) {
+                // Send to backend API
+                try {
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            message: msg,
+                            destName: dest
+                        })
+                    });
+                    const data = await response.json();
+                    if (response.ok) {
+                        const botDiv = document.createElement('div');
+                        botDiv.className = 'flex items-start mb-3';
+                        botDiv.innerHTML = `<div class="bg-gray-100 text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm"><i class="fas fa-robot text-blue-500 mr-1"></i> <strong>AI Concierge:</strong> ${data.reply}<br><span class="text-xs text-gray-400 block mt-1">✅ Saved in your dashboard chat logs</span></div>`;
+                        chatBox.appendChild(botDiv);
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                        return;
+                    }
+                } catch (error) {
+                    console.error('API Chat Error:', error);
+                }
+            }
+            
+            // Fallback for Guests
+            setTimeout(() => {
+                let reply = '';
+                const lowerMsg = msg.toLowerCase();
+                if (lowerMsg.includes('hotel') || lowerMsg.includes('stay') || lowerMsg.includes('resort')) {
+                    reply = `Great choice! In ${dest}, we recommend boutique hotels and luxury resorts. For beachfront options, prices start around $120/night. I can share a curated list of top-rated stays. 😊`;
+                } else if (lowerMsg.includes('flight') || lowerMsg.includes('fly')) {
+                    reply = `Flights to ${dest} vary by season. Round-trip economy from major US hubs averages $600-1100. Want me to check live prices for your dates? ✈️`;
+                } else if (lowerMsg.includes('food') || lowerMsg.includes('eat') || lowerMsg.includes('restaurant')) {
+                    reply = `Local cuisine in ${dest} is incredible! From street food markets to fine dining, I'll prepare a foodie guide. Do you prefer local authentic spots or gourmet experiences? 🍜`;
+                } else if (lowerMsg.includes('best time') || lowerMsg.includes('season')) {
+                    reply = `The best time to visit ${dest} is typically during spring/fall for mild weather. Summer is lively but crowded. Would you like specific monthly recommendations? 🌤️`;
+                } else if (lowerMsg.includes('price') || lowerMsg.includes('budget') || lowerMsg.includes('cost')) {
+                    reply = `Our all-inclusive packages for ${dest} start from $899 for 5 nights. I can customize based on your budget and group size. Tell me your ideal budget range! 💰`;
+                } else {
+                    reply = `Thanks for your question! ${dest} offers amazing adventures. Our travel experts will craft a personalized itinerary just for you. Want to share your travel dates and interests? I'll get you the best deals instantly. 🌍`;
+                }
+                const botDiv = document.createElement('div');
+                botDiv.className = 'flex items-start mb-3';
+                botDiv.innerHTML = `<div class="bg-gray-100 text-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-sm"><i class="fas fa-robot text-blue-500 mr-1"></i> <strong>AI Concierge:</strong> ${reply}<br><span class="text-xs text-blue-500 block mt-1">💡 <a href="sign.html" class="underline hover:text-blue-700">Sign in</a> to save your chat logs and plan itineraries!</span></div>`;
+                chatBox.appendChild(botDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
+        }
+        
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        // ---------- DOM Event Listeners ----------
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            
+            // Mobile menu toggle
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            
+            // Filter buttons
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-blue-600', 'text-white');
+                        b.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    this.classList.add('active', 'bg-blue-600', 'text-white');
+                    this.classList.remove('bg-gray-100', 'text-gray-700');
+                    const type = this.getAttribute('data-type');
+                    renderMarkers(type);
+                    // optionally reset side panel if filtered out selected destination
+                    const detailsPanel = document.getElementById('detailsPanel');
+                    if (!detailsPanel.classList.contains('hidden')) {
+                        const currentName = document.getElementById('destName').innerText;
+                        const stillExists = destinations.some(d => d.name === currentName && (type === 'all' || d.type === type));
+                        if (!stillExists) {
+                            detailsPanel.classList.add('hidden');
+                            document.getElementById('emptyState').classList.remove('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // Search input
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch();
+            });
+            
+            // Close details button
+            document.getElementById('closeDetails').addEventListener('click', () => {
+                document.getElementById('detailsPanel').classList.add('hidden');
+                document.getElementById('emptyState').classList.remove('hidden');
+                selectedDestId = null;
+            });
+            
+            // Chat button
+            document.getElementById('chatExpertBtn').addEventListener('click', () => {
+                const panel = document.getElementById('detailsPanel');
+                let destName = "this destination";
+                if (!panel.classList.contains('hidden')) {
+                    destName = document.getElementById('destName').innerText;
+                }
+                openChatWithContext(destName);
+            });
+            
+            // Modal controls
+            const modal = document.getElementById('chatModal');
+            document.getElementById('closeChatModal').addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            document.getElementById('sendChatMsg').addEventListener('click', sendMessage);
+            document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Travel with iQlipse</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Graphics Side (Left) -->
+        <div class="graphics-side">
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>AI-Powered Travel Planning</h1>
+                <p>Register today and let our smart algorithms design your custom, stress-free dream vacation in seconds.</p>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-route"></i>
+                        <span>Smart Day-by-Day Itineraries</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-hotel"></i>
+                        <span>Exclusive Local Deals</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Interactive Map Routing</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-comments"></i>
+                        <span>24/7 AI Concierge Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Form Side (Right) -->
+        <div class="signup-side">
+            <div class="logo">
+                <i class="fas fa-bed"></i>
+                <span>Travel with iQlipse</span>
+            </div>
+            
+            <h2>Get Started</h2>
+            <p class="subtitle">Create a free account to access custom itineraries.</p>
+            
+            <!-- Social Signup Buttons -->
+            <div class="social-login">
+                <button class="social-btn google">
+                    <i class="fab fa-google"></i>
+                    Sign up with Google
+                </button>
+                <button class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    Sign up with Facebook
+                </button>
+            </div>
+            
+            <div class="divider">Or register with email</div>
+            
+            <!-- Signup Form -->
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullname" placeholder="John Doe" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="travelPreference">Travel Preference</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-plane"></i>
+                        <select id="travelPreference">
+                            <option value="Adventure">🧗 Adventure & Outdoors</option>
+                            <option value="Beach">🏖️ Beach & Relaxation</option>
+                            <option value="City">🏙️ City & Culture</option>
+                            <option value="Mountain">⛰️ Mountain & Hiking</option>
+                            <option value="General">🌍 General Explorer</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                
+                <button type="submit" class="signup-btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            
+            <p class="login-link">
+                Already have an account? <a href="sign.html">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
