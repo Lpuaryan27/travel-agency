@@ -88,6 +88,26 @@ app.use(express.json());
 // Serve static frontend files from the client/dist production directory
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
+// ==================== LEGACY HTML PAGES ====================
+// Serve the root-level HTML pages and their safe assets explicitly
+// (server only exposes specific files — .env and data/ are NOT exposed)
+
+// HTML pages
+app.get('/signup.html', (req, res) => res.sendFile(path.join(__dirname, 'signup.html')));
+app.get('/sign.html',   (req, res) => res.sendFile(path.join(__dirname, 'sign.html')));
+app.get('/dashboard.html', (req, res) => res.sendFile(path.join(__dirname, 'dashboard.html')));
+app.get('/tavel.html',  (req, res) => res.sendFile(path.join(__dirname, 'tavel.html')));
+app.get('/map.html',    (req, res) => res.sendFile(path.join(__dirname, 'map.html')));
+
+// JavaScript files used by the legacy HTML pages
+app.get('/script.js',   (req, res) => res.sendFile(path.join(__dirname, 'script.js')));
+app.get('/signin.js',   (req, res) => res.sendFile(path.join(__dirname, 'signin.js')));
+
+// CSS and image assets
+app.get('/styles.css',  (req, res) => res.sendFile(path.join(__dirname, 'styles.css')));
+app.get('/glowing_world_travel.png', (req, res) => res.sendFile(path.join(__dirname, 'glowing_world_travel.png')));
+// ===========================================================
+
 // JWT Verification Middleware
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
