@@ -13,7 +13,7 @@
                     colors: {
                         primary: '#3B82F6',
                         secondary: '#10B981',
-                        dark: '#1E293B',
+                        dark: '#0F172A',
                         light: '#F8FAFC',
                     }
                 }
@@ -21,483 +21,432 @@
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1368&q=80');
+            background-image: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
         }
-        
         .destination-card:hover {
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
+            transform: translateY(-8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .ai-chatbot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        
-        .chatbot-container {
-            display: none;
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            overflow: hidden;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
-        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
-<body class="font-sans bg-light">
+<body class="font-sans bg-slate-50 text-slate-800">
+    
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full z-50">
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-bed text-primary text-2xl mr-2"></i>
-                <span class="text-xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
-  Travel with iQlipse
-</span>
-
-</span>
-
-</span>
-
-
-                    </div>
-                    <div class="hidden md:ml-6 md:flex md:space-x-8">
-                        <a href="#" class="border-primary text-dark inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
-                        <a href="#destinations" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Destinations</a>
-                        <a href="#deals" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Deals</a>
-                        <a href="#about" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
-                        <a href="#contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-8">
+                    <a href="tavel.html" class="flex items-center space-x-2">
+                        <i class="fas fa-bed text-blue-600 text-2xl"></i>
+                        <span class="text-xl font-bold bg-gradient-to-r from-blue-600 via-indigo-500 to-indigo-600 bg-clip-text text-transparent">iQlipse Travel</span>
+                    </a>
+                    <div class="hidden md:flex space-x-6 text-sm font-medium">
+                        <a href="tavel.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 font-semibold">Home</a>
+                        <a href="map.html" class="text-slate-500 hover:text-slate-800 transition">Interactive Map</a>
+                        <a href="dashboard.html" class="text-slate-500 hover:text-slate-800 transition">Dashboard</a>
                     </div>
                 </div>
-                <!-- ...existing code... -->
-
-<div class="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center space-x-3">
-    <a href="sign.html" class="group">
-        <button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transform transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-            Sign In
-            <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span>
-        </button>
-    </a>
-    <a href="signup.html" class="group">
-        <button class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transform transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">
-            Get Started
-            <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span>
-        </button>
-    </a>
-</div>
-                    <div class="-mr-2 flex items-center md:hidden">
-                        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                    </div>
+                
+                <!-- Dynamic Auth Section -->
+                <div class="hidden md:flex items-center space-x-4" id="navAuthSection">
+                    <a href="sign.html" class="text-slate-600 hover:text-blue-600 transition font-semibold text-sm">Sign In</a>
+                    <a href="signup.html" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md hover:shadow-lg transition">Get Started</a>
+                </div>
+                
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 text-xl focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="hidden md:hidden" id="mobile-menu">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="#" class="bg-primary border-primary text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
-                <a href="#destinations" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Destinations</a>
-                <a href="#deals" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Deals</a>
-                <a href="#about" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
-                <a href="#contact" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
-                <div class="pt-4 pb-3 border-t border-gray-200">
-                    <div class="mt-3 space-y-1">
-                        <button class="w-full bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Sign In</button>
-                    </div>
-                </div>
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden bg-white border-t px-4 py-3 space-y-2" id="mobile-menu">
+            <a href="tavel.html" class="block py-2 text-blue-600 font-semibold">Home</a>
+            <a href="map.html" class="block py-2 text-slate-600 hover:text-slate-800">Interactive Map</a>
+            <a href="dashboard.html" class="block py-2 text-slate-600 hover:text-slate-800">Dashboard</a>
+            <div class="border-t border-slate-100 my-2 pt-2" id="mobileAuthSection">
+                <a href="sign.html" class="block py-2 text-slate-600">Sign In</a>
+                <a href="signup.html" class="block py-2 text-blue-600 font-semibold">Get Started</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-bg pt-24 pb-32 md:pt-32 md:pb-48 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-<div class="text-center px-4 py-12 animate-fade-in">
-  <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 bg-clip-text text-transparent drop-shadow-md animate-slide-in-down">
-    AI-Powered Travel Experiences
-  </h1>
-
-  <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200 animate-fade-in delay-200">
-    Let our artificial intelligence craft your perfect vacation based on your preferences and budget.
-  </p>
-</div>
-
-                <div class="flex flex-col md:flex-row justify-center gap-4">
-                    <div class="flex flex-col sm:flex-row gap-6 items-center justify-center">
-    <div class="relative group cursor-pointer">
-        <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-teal-400 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-        <div class="relative bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-500 hover:to-blue-300 text-white px-10 py-4 rounded-lg text-xl font-bold shadow-lg transition-all duration-300 transform group-hover:-translate-y-1">
-            ✈️ Start Your Adventure
-            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-white/30 blur-md group-hover:bg-white/50 transition duration-300"></div>
-        </div>
-    </div>
-    
-    <div class="relative group cursor-pointer">
-        <div class="absolute -inset-0.5 bg-gradient-to-r from-amber-200 to-yellow-300 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-200"></div>
-        <div class="relative bg-white hover:bg-gray-50 text-gray-800 px-10 py-4 rounded-lg text-xl font-bold border-2 border-amber-100 shadow-lg transition-all duration-300 transform group-hover:-translate-y-1">
-            🌍 Discover Hidden Gems
-            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-amber-100/50 blur-md group-hover:bg-amber-100/70 transition duration-300"></div>
-        </div>
-    </div>
-</div>
+    <header class="hero-bg pt-32 pb-44 text-white relative overflow-hidden flex items-center min-h-[90vh]">
+        <!-- Decorative shapes -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="text-center max-w-4xl mx-auto space-y-6">
+                <div class="inline-flex items-center px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-xs font-semibold tracking-wider text-teal-300">
+                    ✈️ GENERATIVE TRAVEL PLATFORM
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                    AI-Powered <span class="bg-gradient-to-r from-teal-300 via-blue-300 to-indigo-200 bg-clip-text text-transparent">Travel Experiences</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed">
+                    Let our artificial intelligence craft your perfect custom vacation timeline based on your specific style, preference, and budget constraints.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                    <a href="map.html" class="px-8 py-3.5 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        🗺️ Open Interactive Map
+                    </a>
+                    <a href="#calculator" class="px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 backdrop-blur-sm">
+                        📊 Calculate Travel Cost
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Search Section -->
-    <section class="bg-white shadow-lg rounded-lg mx-4 md:mx-auto -mt-16 md:-mt-20 max-w-5xl relative z-10 p-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <section class="max-w-5xl mx-4 md:mx-auto -mt-20 relative z-10 p-6 bg-white rounded-3xl shadow-xl border border-slate-100 glass-panel">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Destination</label>
-                <input type="text" placeholder="Where to?" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Destination</label>
+                <div class="relative">
+                    <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="heroSearchDest" placeholder="Where to? (e.g. Bali)" class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-slate-800 bg-white/50">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Check In</label>
-                <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Check In</label>
+                <div class="relative">
+                    <i class="far fa-calendar absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="date" class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-slate-800 bg-white/50">
+                </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Check Out</label>
-                <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Check Out</label>
+                <div class="relative">
+                    <i class="far fa-calendar absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="date" class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-slate-800 bg-white/50">
+                </div>
             </div>
-            <div class="flex items-end">
-                <button class="w-full bg-secondary hover:bg-green-600 text-white px-4 py-2 rounded-md text-lg font-semibold">Search</button>
+            <div>
+                <button onclick="triggerHeroSearch()" class="w-full bg-slate-900 hover:bg-slate-850 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-search text-xs"></i> Search map
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-16 bg-light">
+    <!-- Interactive Budget Calculator Section -->
+    <section class="py-20 bg-slate-50 border-b border-slate-100" id="calculator">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-         <div class="bg-gradient-to-br from-indigo-900 to-purple-800 py-20 px-6 rounded-2xl shadow-xl relative overflow-hidden">
-  <!-- Particle background -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/4 left-1/5 w-3 h-3 rounded-full bg-teal-400 animate-particle-1"></div>
-    <div class="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-yellow-300 animate-particle-2"></div>
-    <div class="absolute bottom-1/5 left-1/3 w-4 h-4 rounded-full bg-white animate-particle-3"></div>
-    <div class="absolute bottom-1/3 right-1/5 w-3 h-3 rounded-full bg-pink-400 animate-particle-4"></div>
-  </div>
-  
-  <!-- Glow effect -->
-  <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-500 opacity-20 blur-3xl"></div>
-  
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="inline-block mb-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-      <span class="text-sm font-semibold text-teal-300 tracking-widest">TRAVEL REIMAGINED</span>
-    </div>
-    
-    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 animate-typing">
-      Discover Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-blue-300">Perfect</span> Journey
-    </h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-      <div class="bg-white/5 p-6 rounded-xl backdrop-blur-sm border border-white/10 hover:border-teal-300/30 transition-all hover:scale-[1.02]">
-        <div class="w-12 h-12 mb-4 mx-auto rounded-lg bg-teal-400/10 flex items-center justify-center">
-          <svg class="w-6 h-6 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-white mb-2">Smart Itineraries</h3>
-        <p class="text-blue-100">AI-crafted plans tailored to your travel style</p>
-      </div>
-      
-      <div class="bg-white/5 p-6 rounded-xl backdrop-blur-sm border border-white/10 hover:border-blue-300/30 transition-all hover:scale-[1.02]">
-        <div class="w-12 h-12 mb-4 mx-auto rounded-lg bg-blue-400/10 flex items-center justify-center">
-          <svg class="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-white mb-2">Stress-Free</h3>
-        <p class="text-blue-100">Real-time updates and seamless coordination</p>
-      </div>
-      
-      <div class="bg-white/5 p-6 rounded-xl backdrop-blur-sm border border-white/10 hover:border-purple-300/30 transition-all hover:scale-[1.02]">
-        <div class="w-12 h-12 mb-4 mx-auto rounded-lg bg-purple-400/10 flex items-center justify-center">
-          <svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-white mb-2">Global Access</h3>
-        <p class="text-blue-100">Curated experiences in 100+ countries</p>
-      </div>
-    </div>
-    
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <button class="px-8 py-3.5 bg-gradient-to-r from-teal-400 to-blue-500 hover:from-teal-300 hover:to-blue-400 text-gray-900 font-bold rounded-lg shadow-lg transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-        </svg>
-        Begin Exploration
-      </button>
-      <button class="px-8 py-3.5 bg-transparent border-2 border-white/30 hover:border-white/50 text-white font-bold rounded-lg shadow-lg transform hover:scale-[1.02] transition-all duration-300 hover:bg-white/5">
-        Watch Demo <span class="ml-1">→</span>
-      </button>
-    </div>
-  </div>
-</div>
+            <div class="text-center mb-12 max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Pricing Tool</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">Interactive Budget Estimator</h2>
+                <p class="text-slate-500">Estimate your travel budget dynamically depending on your style and duration preferences.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Inputs (Left Pane) -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-slate-150 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <!-- Travel preference -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3"><i class="fas fa-compass text-blue-500 mr-1.5"></i> Travel Theme Style</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                <button onclick="setCalcPref('Beach', 1.1, this)" class="calc-pref-btn active border-2 border-blue-500 bg-blue-50 text-blue-700 py-3 rounded-xl text-center text-xs font-bold transition flex flex-col items-center gap-1.5">
+                                    <span class="text-lg">🏖️</span> Beach
+                                </button>
+                                <button onclick="setCalcPref('Mountain', 1.0, this)" class="calc-pref-btn border-2 border-slate-200 hover:border-slate-300 text-slate-700 py-3 rounded-xl text-center text-xs font-bold transition flex flex-col items-center gap-1.5">
+                                    <span class="text-lg">⛰️</span> Mountain
+                                </button>
+                                <button onclick="setCalcPref('City', 1.25, this)" class="calc-pref-btn border-2 border-slate-200 hover:border-slate-300 text-slate-700 py-3 rounded-xl text-center text-xs font-bold transition flex flex-col items-center gap-1.5">
+                                    <span class="text-lg">🏙️</span> City
+                                </button>
+                                <button onclick="setCalcPref('Adventure', 1.3, this)" class="calc-pref-btn border-2 border-slate-200 hover:border-slate-300 text-slate-700 py-3 rounded-xl text-center text-xs font-bold transition flex flex-col items-center gap-1.5">
+                                    <span class="text-lg">🧗</span> Adventure
+                                </button>
+                            </div>
+                        </div>
 
-<style>
-  @keyframes particle-1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, 20px); }
-  }
-  @keyframes particle-2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-10px, 15px); }
-  }
-  @keyframes particle-3 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(5px, -10px); }
-  }
-  @keyframes particle-4 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-15px, -5px); }
-  }
-  .animate-particle-1 {
-    animation: particle-1 7s ease-in-out infinite;
-  }
-  .animate-particle-2 {
-    animation: particle-2 9s ease-in-out infinite;
-  }
-  .animate-particle-3 {
-    animation: particle-3 11s ease-in-out infinite;
-  }
-  .animate-particle-4 {
-    animation: particle-4 8s ease-in-out infinite;
-  }
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-  .animate-typing {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 3.5s steps(40, end);
-  }
-</style>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-robot text-primary text-2xl"></i>
+                        <!-- Slider for Days -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-sm font-bold text-slate-700"><i class="far fa-calendar-alt text-blue-500 mr-1.5"></i> Vacation Duration</label>
+                                <span class="text-sm font-extrabold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg" id="calcDaysDisplay">7 Days</span>
+                            </div>
+                            <input type="range" min="1" max="14" value="7" id="calcDaysSlider" oninput="updateCalculator()" 
+                                   class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                            <div class="flex justify-between text-[10px] text-slate-400 pt-1 font-bold">
+                                <span>1 Day</span>
+                                <span>7 Days</span>
+                                <span>14 Days</span>
+                            </div>
+                        </div>
+
+                        <!-- Class Tier -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-3"><i class="fas fa-gem text-blue-500 mr-1.5"></i> Luxury Class Level</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setCalcTier('Economy', 80, 350, this)" class="calc-tier-btn border-2 border-slate-200 hover:border-slate-300 text-slate-700 py-3 rounded-xl text-xs font-bold transition flex flex-col items-center gap-1">
+                                    <span class="font-extrabold text-base">🎒</span> Economy
+                                </button>
+                                <button onclick="setCalcTier('Comfort', 180, 750, this)" class="calc-tier-btn active border-2 border-blue-500 bg-blue-50 text-blue-700 py-3 rounded-xl text-xs font-bold transition flex flex-col items-center gap-1">
+                                    <span class="font-extrabold text-base">🏡</span> Comfort
+                                </button>
+                                <button onclick="setCalcTier('Luxury', 450, 2000, this)" class="calc-tier-btn border-2 border-slate-200 hover:border-slate-300 text-slate-700 py-3 rounded-xl text-xs font-bold transition flex flex-col items-center gap-1">
+                                    <span class="font-extrabold text-base">👑</span> Ultra VIP
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">AI Trip Planner</h3>
-                    <p class="text-gray-600">Our advanced AI creates personalized itineraries based on your interests, budget, and travel style.</p>
                 </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-secondary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-bolt text-secondary text-2xl"></i>
+
+                <!-- Live Results (Right Card) -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl shadow-xl text-white flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-teal-300 uppercase tracking-widest">Est. Cost Breakdown</span>
+                        <div class="py-6 border-b border-slate-800">
+                            <span class="text-slate-400 text-xs font-semibold block uppercase">Total Estimated Package</span>
+                            <div class="flex items-baseline gap-1 mt-1">
+                                <span class="text-4xl sm:text-5xl font-black text-white tracking-tight" id="calcTotalDisplay">$2,137</span>
+                                <span class="text-slate-400 text-sm font-semibold">USD</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar breakdowns -->
+                        <div class="space-y-4 pt-6">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
+                                    <span>🏨 Lodging & Stays (40%)</span>
+                                    <span id="calcLodgingCost">$855</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-blue-400 h-full rounded-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
+                                    <span>✈️ Transports & Flights (35%)</span>
+                                    <span id="calcTransportCost">$748</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-teal-400 h-full rounded-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
+                                    <span>🍽️ Foods & Local Activities (25%)</span>
+                                    <span id="calcActivitiesCost">$534</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-indigo-400 h-full rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Instant Booking</h3>
-                    <p class="text-gray-600">Book flights, hotels, and activities in seconds with our seamless integration with top providers.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-headset text-primary text-2xl"></i>
+
+                    <div class="pt-8">
+                        <button onclick="bookCalculatedTrip()" class="w-full bg-gradient-to-r from-teal-400 to-blue-500 hover:from-teal-300 hover:to-blue-400 text-slate-900 font-extrabold py-3.5 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-magic"></i> Compile AI Custom Itinerary
+                        </button>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">24/7 AI Support</h3>
-                    <p class="text-gray-600">Get instant answers to all your travel questions anytime, anywhere with our AI travel assistant.</p>
                 </div>
             </div>
         </div>
-        <div class="bg-gray-900 text-white py-16 px-6 my-12">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-8 text-center">
-    <div class="animate-count-up" data-count="500000">
-      <div class="text-4xl font-bold text-yellow-300 mb-2">500,000+</div>
-      <div class="text-gray-300">Happy Travelers</div>
-    </div>
-    <div class="animate-count-up" data-count="120">
-      <div class="text-4xl font-bold text-yellow-300 mb-2">120+</div>
-      <div class="text-gray-300">Countries Covered</div>
-    </div>
-    <div class="animate-count-up" data-count="98">
-      <div class="text-4xl font-bold text-yellow-300 mb-2">98%</div>
-      <div class="text-gray-300">Satisfaction Rate</div>
-    </div>
-    <div class="animate-count-up" data-count="24">
-      <div class="text-4xl font-bold text-yellow-300 mb-2">24/7</div>
-      <div class="text-gray-300">24hours  Support</div>
-    </div>
-  </div>
-</div>
+    </section>
+
+    <!-- Slogan & Smart Features -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-indigo-900 to-slate-900 py-16 px-8 rounded-3xl shadow-xl relative overflow-hidden text-center max-w-5xl mx-auto text-white">
+                <!-- Particle background style circles -->
+                <div class="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10 space-y-4 max-w-3xl mx-auto">
+                    <span class="text-xs font-bold text-teal-400 tracking-widest uppercase">Travel Reimagined</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">Discover Your Perfect Journey</h2>
+                    <p class="text-slate-300 font-light leading-relaxed max-w-2xl mx-auto text-sm md:text-base">
+                        Our customized generative AI coordinates with localized hotel directories and flight feeds to craft optimized, stress-free bookings in real time.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-slate-200">
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl">
+                            <i class="fas fa-route text-2xl text-teal-300 mb-2"></i>
+                            <h4 class="font-bold text-sm">Smart Itineraries</h4>
+                            <p class="text-xs text-slate-400 mt-1">Schedules matching your budget style</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl">
+                            <i class="fas fa-shield-alt text-2xl text-blue-400 mb-2"></i>
+                            <h4 class="font-bold text-sm">Stress-Free Checks</h4>
+                            <p class="text-xs text-slate-400 mt-1">Real-time alerts & checklist syncing</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl">
+                            <i class="fas fa-globe text-2xl text-indigo-400 mb-2"></i>
+                            <h4 class="font-bold text-sm">Global Coverage</h4>
+                            <p class="text-xs text-slate-400 mt-1">Curated spots across 120+ regions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Popular Destinations -->
-    <section class="py-16 bg-white" id="destinations">
+    <section class="py-16 bg-slate-50 border-t border-slate-100" id="destinations">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Popular Destinations</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Discover handpicked destinations loved by travelers worldwide.</p>
+            <div class="text-center mb-12 space-y-2">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Handpicked Sights</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">Popular Destinations</h2>
+                <p class="text-slate-500 max-w-lg mx-auto">Explore some of our traveler's absolute favorite destinations worldwide.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Destination 1 -->
-                <div class="destination-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="destination-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-150 flex flex-col justify-between">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bali" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                            <h3 class="text-white font-semibold text-xl">Bali, Indonesia</h3>
-                            <p class="text-gray-200">From $899</p>
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&auto=format" alt="Bali" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Bali, Indonesia</h3>
+                            <p class="text-teal-300 text-xs font-semibold">From $899</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-600"><i class="fas fa-star text-yellow-400"></i> 4.8 (1.2k)</span>
-                            <span class="text-primary font-medium">7 Days</span>
+                    <div class="p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center text-xs text-slate-500 font-bold">
+                            <span><i class="fas fa-star text-amber-400 mr-1"></i> 4.8 (1.2k)</span>
+                            <span class="text-blue-600 bg-blue-50 px-2 py-0.5 rounded">7 Days</span>
                         </div>
-                        <button class="w-full bg-primary hover:bg-blue-700 text-white py-2 rounded-md">Explore</button>
+                        <a href="map.html?search=Bali" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-xl text-xs font-bold transition">Explore Map</a>
                     </div>
                 </div>
                 
                 <!-- Destination 2 -->
-                <div class="destination-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="destination-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-150 flex flex-col justify-between">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Paris" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                            <h3 class="text-white font-semibold text-xl">Paris, France</h3>
-                            <p class="text-gray-200">From $1,299</p>
+                        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&auto=format" alt="Paris" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Paris, France</h3>
+                            <p class="text-teal-300 text-xs font-semibold">From $1,299</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-600"><i class="fas fa-star text-yellow-400"></i> 4.9 (1.5k)</span>
-                            <span class="text-primary font-medium">5 Days</span>
+                    <div class="p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center text-xs text-slate-500 font-bold">
+                            <span><i class="fas fa-star text-amber-400 mr-1"></i> 4.9 (1.5k)</span>
+                            <span class="text-blue-600 bg-blue-50 px-2 py-0.5 rounded">5 Days</span>
                         </div>
-                        <button class="w-full bg-primary hover:bg-blue-700 text-white py-2 rounded-md">Explore</button>
+                        <a href="map.html?search=Paris" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-xl text-xs font-bold transition">Explore Map</a>
                     </div>
                 </div>
                 
                 <!-- Destination 3 -->
-                <div class="destination-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="destination-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-150 flex flex-col justify-between">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Tokyo" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                            <h3 class="text-white font-semibold text-xl">Tokyo, Japan</h3>
-                            <p class="text-gray-200">From $1,599</p>
+                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&auto=format" alt="Tokyo" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">Tokyo, Japan</h3>
+                            <p class="text-teal-300 text-xs font-semibold">From $1,599</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-600"><i class="fas fa-star text-yellow-400"></i> 4.7 (980)</span>
-                            <span class="text-primary font-medium">10 Days</span>
+                    <div class="p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center text-xs text-slate-500 font-bold">
+                            <span><i class="fas fa-star text-amber-400 mr-1"></i> 4.7 (980)</span>
+                            <span class="text-blue-600 bg-blue-50 px-2 py-0.5 rounded">10 Days</span>
                         </div>
-                        <button class="w-full bg-primary hover:bg-blue-700 text-white py-2 rounded-md">Explore</button>
+                        <a href="map.html?search=Tokyo" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-xl text-xs font-bold transition">Explore Map</a>
                     </div>
                 </div>
                 
                 <!-- Destination 4 -->
-                <div class="destination-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="destination-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-150 flex flex-col justify-between">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="New York" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                            <h3 class="text-white font-semibold text-xl">New York, USA</h3>
-                            <p class="text-gray-200">From $1,199</p>
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?w=600&auto=format" alt="New York" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg">New York, USA</h3>
+                            <p class="text-teal-300 text-xs font-semibold">From $1,199</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-600"><i class="fas fa-star text-yellow-400"></i> 4.8 (1.3k)</span>
-                            <span class="text-primary font-medium">6 Days</span>
+                    <div class="p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center text-xs text-slate-500 font-bold">
+                            <span><i class="fas fa-star text-amber-400 mr-1"></i> 4.8 (1.3k)</span>
+                            <span class="text-blue-600 bg-blue-50 px-2 py-0.5 rounded">6 Days</span>
                         </div>
-                        <button class="w-full bg-primary hover:bg-blue-700 text-white py-2 rounded-md">Explore</button>
+                        <a href="map.html?search=New%20York" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-xl text-xs font-bold transition">Explore Map</a>
                     </div>
                 </div>
             </div>
-            
-            <div class="text-center mt-10">
-    <a href="map.html">
-        <button class="bg-primary hover:bg-blue-700 text-white border border-primary px-8 py-3 rounded-md text-lg font-semibold transition-all duration-300">
-            View All Destinations
-        </button>
-    </a>
-</div>
         </div>
     </section>
 
     <!-- Special Deals -->
-    <section class="py-16 bg-gray-50" id="deals">
+    <section class="py-16 bg-white" id="deals">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Special AI-Powered Deals</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Exclusive offers tailored just for you by our AI algorithm.</p>
+            <div class="text-center mb-12 space-y-2">
+                <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Hot Offers</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">Special AI-Recommended Deals</h2>
+                <p class="text-slate-500">Curated by our neural algorithms for maximum value and optimal scheduling.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Deal 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md flex flex-col md:flex-row">
+                <div class="bg-slate-50 rounded-3xl overflow-hidden shadow-sm border border-slate-150 flex flex-col md:flex-row hover:shadow-md transition">
                     <div class="md:w-1/3 h-48 md:h-auto">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Rome" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format" alt="Rome" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 md:w-2/3">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="text-xl font-semibold">Rome & Florence</h3>
-                                <p class="text-gray-600">7 Nights Italian Adventure</p>
+                    <div class="p-6 md:w-2/3 flex flex-col justify-between gap-4">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-slate-900">Rome & Florence</h3>
+                                <span class="bg-teal-100 text-teal-800 text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase">AI Top Pick</span>
                             </div>
-                            <span class="bg-secondary text-white text-sm px-2 py-1 rounded">AI Recommended</span>
+                            <p class="text-xs text-slate-500 leading-relaxed">Experience historic Italy with an AI-curated itinerary including premium flights and luxury hotel packages.</p>
                         </div>
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span class="text-gray-700 mr-4">4.9 (1.4k reviews)</span>
-                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                            <span class="text-gray-700">Italy</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Experience the best of Italy with this AI-curated package including flights, luxury hotels, and guided tours.</p>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center pt-2 border-t border-slate-200">
                             <div>
-                                <span class="text-gray-400 line-through">$2,499</span>
-                                <span class="text-xl font-bold text-primary ml-2">$1,899</span>
+                                <span class="text-slate-400 line-through text-xs">$2,499</span>
+                                <span class="text-lg font-black text-blue-600 block leading-none">$1,899</span>
                             </div>
-                            <button class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md">Book Now</button>
+                            <a href="map.html?search=Paris" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition">Plan Trip</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Deal 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md flex flex-col md:flex-row">
+                <div class="bg-slate-50 rounded-3xl overflow-hidden shadow-sm border border-slate-150 flex flex-col md:flex-row hover:shadow-md transition">
                     <div class="md:w-1/3 h-48 md:h-auto">
-                        <img src="https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1620&q=80" alt="Santorini" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?w=600&auto=format" alt="Santorini" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 md:w-2/3">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="text-xl font-semibold">Santorini Escape</h3>
-                                <p class="text-gray-600">5 Nights Luxury Stay</p>
+                    <div class="p-6 md:w-2/3 flex flex-col justify-between gap-4">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-slate-900">Santorini Escape</h3>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase">Trending</span>
                             </div>
-                            <span class="bg-primary text-white text-sm px-2 py-1 rounded">Popular</span>
+                            <p class="text-xs text-slate-500 leading-relaxed">Relax with stunning caldera views. The package features private infinity pools and boutique local restaurants.</p>
                         </div>
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span class="text-gray-700 mr-4">4.8 (1.1k reviews)</span>
-                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                            <span class="text-gray-700">Greece</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Our AI found this perfect romantic getaway with sunset views, private pools, and gourmet dining included.</p>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center pt-2 border-t border-slate-200">
                             <div>
-                                <span class="text-gray-400 line-through">$1,799</span>
-                                <span class="text-xl font-bold text-primary ml-2">$1,399</span>
+                                <span class="text-slate-400 line-through text-xs">$1,799</span>
+                                <span class="text-lg font-black text-blue-600 block leading-none">$1,399</span>
                             </div>
-                            <button class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md">Book Now</button>
+                            <a href="map.html?search=Santorini" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition">Plan Trip</a>
                         </div>
                     </div>
                 </div>
@@ -506,527 +455,423 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-slate-50 border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">What Our Travelers Say</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Hear from people who experienced AI-powered travel with us.</p>
+            <div class="text-center mb-12 space-y-2">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Reviews</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">What Our Travelers Say</h2>
+                <p class="text-slate-500 max-w-md mx-auto">Verified feedbacks from tourists globally.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J." class="w-full h-full object-cover">
-                        </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-150 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J." class="w-10 h-10 rounded-full object-cover shadow-sm">
                         <div>
-                            <h4 class="font-semibold">Sarah J.</h4>
-                            <div class="flex">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
+                            <h4 class="font-bold text-sm text-slate-800">Sarah J.</h4>
+                            <div class="flex text-amber-400 text-xs gap-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"The AI trip planner created the perfect itinerary for my Japan trip. It knew exactly what I'd like based on my preferences - from hidden ramen shops to serene temples. Best travel experience ever!"</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">"The AI trip planner created the perfect itinerary for my Japan trip. It knew exactly what I'd like based on my preferences - from hidden ramen shops to serene temples. Best travel experience ever!"</p>
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T." class="w-full h-full object-cover">
-                        </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-150 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T." class="w-10 h-10 rounded-full object-cover shadow-sm">
                         <div>
-                            <h4 class="font-semibold">Michael T.</h4>
-                            <div class="flex">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
+                            <h4 class="font-bold text-sm text-slate-800">Michael T.</h4>
+                            <div class="flex text-amber-400 text-xs gap-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"I was skeptical about AI planning my honeymoon, but  iQlipse nailed it! They found us a luxury villa in Bali within our budget that we never would have found on our own. The AI even suggested perfect romantic restaurants."</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">"I was skeptical about AI planning my honeymoon, but iQlipse nailed it! They found us a luxury villa in Bali within our budget that we never would have found on our own."</p>
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K." class="w-full h-full object-cover">
-                        </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-150 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K." class="w-10 h-10 rounded-full object-cover shadow-sm">
                         <div>
-                            <h4 class="font-semibold">Priya K.</h4>
-                            <div class="flex">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            <h4 class="font-bold text-sm text-slate-800">Priya K.</h4>
+                            <div class="flex text-amber-400 text-xs gap-0.5">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"As a solo female traveler, safety is my top priority. PowerBed's AI recommended destinations and accommodations perfect for solo travelers, and their 24/7 AI assistant gave me peace of mind throughout my trip."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Trip Planner CTA -->
-    <section class="py-16 bg-primary text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-6">Let Our AI Plan Your Perfect Trip</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">Answer a few questions and our artificial intelligence will create a personalized travel itinerary just for you.</p>
-            <button class="bg-white hover:bg-gray-100 text-primary px-8 py-3 rounded-md text-lg font-semibold">Start AI Trip Planner</button>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="py-16 bg-white" id="about">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold text-dark mb-6">About Travel with iQlipse</h2>
-                    <p class="text-gray-600 mb-4">Founded in 2025,Travel with iQlipse combines cutting-edge artificial intelligence with deep travel expertise to revolutionize how people plan and experience their vacations.</p>
-                    <p class="text-gray-600 mb-6">Our proprietary AI algorithms analyze millions of data points to create perfectly tailored travel experiences that match your unique preferences, budget, and travel style.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
-                                <i class="fas fa-brain text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-dark">Smart AI Technology</h4>
-                                <p class="text-gray-600">Our AI learns from millions of traveler preferences to make perfect recommendations.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-secondary bg-opacity-10 p-2 rounded-full mr-4">
-                                <i class="fas fa-globe text-secondary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-dark">Global Network</h4>
-                                <p class="text-gray-600">Partnerships with thousands of hotels, airlines, and activity providers worldwide.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4">
-                                <i class="fas fa-heart text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-dark">Customer First</h4>
-                                <p class="text-gray-600">Real human support backed by AI to ensure you have the best experience possible.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Team" class="rounded-lg shadow-xl w-full">
-                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-md hidden md:block">
-                        <div class="flex items-center">
-                            <div class="bg-primary text-white p-3 rounded-full mr-3">
-                                <i class="fas fa-trophy text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark">2024 Travel Innovation Award</h4>
-                                <p class="text-gray-600 text-sm">Best AI Travel Platform</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-dark mb-4">Get Travel Deals & AI Tips</h2>
-            <p class="text-gray-600 mb-8">Subscribe to our newsletter and receive personalized travel recommendations from our AI.</p>
-            <div class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-md border border-gray-300 focus:ring-primary focus:border-primary">
-                <button class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold">Subscribe</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="py-16 bg-white" id="contact">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Contact Us</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Have questions? Our AI assistant is available 24/7, or you can reach our human team during business hours.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <form>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Subject</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Message</label>
-                            <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"></textarea>
-                        </div>
-                        <button type="submit" class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold">Send Message</button>
-                    </form>
-                </div>
-                
-                <div>
-                    <div class="bg-gray-50 p-6 rounded-lg h-full">
-                        <h3 class="text-xl font-semibold mb-6">Contact Information</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
-                                    <i class="fas fa-map-marker-alt text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-dark">Address</h4>
-                                    <p class="text-gray-600">123 AI Avenue, Tech City, TC 10101</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-secondary bg-opacity-10 p-3 rounded-full mr-4">
-                                    <i class="fas fa-phone-alt text-secondary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-dark">Phone</h4>
-                                    <p class="text-gray-600">+1 (555) 123-4567</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
-                                    <i class="fas fa-envelope text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-dark">Email</h4>
-                                    <p class="text-gray-600">info@powerbedtravel.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-secondary bg-opacity-10 p-3 rounded-full mr-4">
-                                    <i class="fas fa-clock text-secondary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-dark">Hours</h4>
-                                    <p class="text-gray-600">Monday-Friday: 9am-6pm</p>
-                                    <p class="text-gray-600">Saturday: 10am-4pm</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="font-medium text-dark mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="bg-gray-200 hover:bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                                    <i class="fab fa-facebook-f text-gray-700"></i>
-                                </a>
-                                <a href="#" class="bg-gray-200 hover:bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                                    <i class="fab fa-twitter text-gray-700"></i>
-                                </a>
-                                <a href="#" class="bg-gray-200 hover:bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                                    <i class="fab fa-instagram text-gray-700"></i>
-                                </a>
-                                <a href="#" class="bg-gray-200 hover:bg-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
-                                    <i class="fab fa-linkedin-in text-gray-700"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">"As a solo female traveler, safety is my top priority. iQlipse AI recommended accommodations perfect for solo travelers, and their 24/7 AI assistant gave me peace of mind."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-bed text-primary text-2xl mr-2"></i>
-                        <span class="text-xl font-bold">Travel with iQlipse</span>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 text-white">
+                        <i class="fas fa-bed text-blue-400 text-xl"></i>
+                        <span class="font-extrabold text-lg">iQlipse Travel</span>
                     </div>
-                    <p class="text-gray-400 mb-4">AI-powered travel experiences tailored just for you.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Premium AI-based itineraries, booking systems, and concierge travel tools.</p>
                 </div>
-                
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#destinations" class="text-gray-400 hover:text-white">Destinations</a></li>
-                        <li><a href="#deals" class="text-gray-400 hover:text-white">Special Deals</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">Features</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="map.html" class="hover:text-white">Interactive Leaflet Map</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white">AI Plan Generator</a></li>
+                        <li><a href="sign.html" class="hover:text-white font-semibold">User Dashboard</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Conditions</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">Contact</h4>
+                    <ul class="space-y-2 text-xs text-slate-500">
+                        <li><i class="fas fa-envelope mr-2"></i> info@iqlipsetravel.com</li>
+                        <li><i class="fas fa-phone mr-2"></i> +1 (555) 123-4567</li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Subscribe to get AI-curated travel deals and tips.</p>
+                    <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">Newsletter</h4>
+                    <p class="text-xs text-slate-500 mb-3">Join us for top travel tips and hotel deals.</p>
                     <div class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-md text-gray-800 w-full">
-                        <button class="bg-primary hover:bg-blue-700 px-4 py-2 rounded-r-md">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                        <input type="email" placeholder="Email Address" class="px-3 py-2 rounded-l-xl text-slate-800 w-full text-xs outline-none">
+                        <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-xl text-white text-xs"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Travel with iQlipse. All rights reserved.</p>
+            <div class="border-t border-slate-800 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                <p>© 2026 iQlipse Inc. All rights reserved.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Cookies</a>
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- AI Chatbot Floating Button -->
-<button class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white w-16 h-16 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 z-40" id="chatbotButton">
-    <i class="fas fa-robot text-2xl"></i>
-    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center animate-pulse">AI</span>
-</button>
+    <button class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 z-40 animate-float" id="chatbotButton">
+        <i class="fas fa-robot text-2xl"></i>
+        <span class="absolute -top-1 -right-1 bg-teal-400 text-slate-900 text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white">AI</span>
+    </button>
 
-<!-- Chatbot Container -->
-<div class="fixed bottom-24 right-8 w-96 h-[500px] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden z-50 hidden transform transition-all duration-300 scale-95 opacity-0" id="chatbotContainer">
-    <!-- Chat Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <i class="fas fa-robot text-xl"></i>
-            <h3 class="font-semibold text-lg">Travel with iQlipse AI Assistant</h3>
-        </div>
-        <div class="flex space-x-2">
-            <button class="text-white hover:text-gray-200 p-1 rounded-full hover:bg-blue-700">
-                <i class="fas fa-ellipsis-h"></i>
-            </button>
-            <button id="closeChatbot" class="text-white hover:text-gray-200 p-1 rounded-full hover:bg-blue-700">
+    <!-- Chatbot Container -->
+    <div class="fixed bottom-28 right-8 w-[380px] h-[520px] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden z-50 hidden border border-slate-100 transform transition-all duration-300 scale-95 opacity-0" id="chatbotContainer">
+        <!-- Chat Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex justify-between items-center shadow-md">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-robot text-xl"></i>
+                <div>
+                    <h3 class="font-bold text-sm">iQlipse Travel Assistant</h3>
+                    <span class="text-[9px] text-teal-300 font-bold block">Online &amp; Ready to plan</span>
+                </div>
+            </div>
+            <button id="closeChatbot" class="text-white/80 hover:text-white text-lg focus:outline-none">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-    </div>
-    
-    <!-- Chat Messages -->
-    <div class="flex-1 p-4 overflow-y-auto bg-gray-50" id="chatMessages">
-        <div class="flex mb-4">
-            <div class="bg-white p-3 rounded-lg shadow max-w-xs">
-                <p class="text-gray-800">Hello! I'm your Travel with iQlipse assistant. How can I help you today?</p>
-                <p class="text-xs text-gray-500 mt-1">Just now</p>
+        
+        <!-- Chat Messages -->
+        <div class="flex-1 p-4 overflow-y-auto bg-slate-50 space-y-3" id="chatMessages">
+            <div class="flex mb-2">
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-xs text-slate-700 border border-slate-150">
+                    <p>Hello! I'm your iQlipse AI assistant. How can I help you today?</p>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Chat Input -->
-    <div class="p-4 border-t border-gray-200 bg-white">
-        <div class="flex items-center space-x-2">
-            <button class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100">
-                <i class="fas fa-paperclip"></i>
-            </button>
-            <input type="text" placeholder="Type your message..." 
-                   class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                   id="chatInput">
-            <button id="sendMessage" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-        <p class="text-xs text-gray-500 mt-2 text-center"> iQlipse AI Assistant • Always learning</p>
-    </div>
-</div>
 
-<script>
-// Chatbot functionality with API integration
-document.addEventListener('DOMContentLoaded', function() {
-    const chatbotButton = document.getElementById('chatbotButton');
-    const chatbotContainer = document.getElementById('chatbotContainer');
-    const closeChatbot = document.getElementById('closeChatbot');
-    const chatInput = document.getElementById('chatInput');
-    const sendMessage = document.getElementById('sendMessage');
-    const chatMessages = document.getElementById('chatMessages');
-    
-    // Toggle chatbot visibility with animation
-    chatbotButton.addEventListener('click', () => {
-        if (chatbotContainer.classList.contains('hidden')) {
-            chatbotContainer.classList.remove('hidden');
-            setTimeout(() => {
-                chatbotContainer.classList.remove('scale-95', 'opacity-0');
-                chatbotContainer.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        } else {
+        <!-- Quick Reply Chips -->
+        <div class="px-4 py-2 bg-slate-50 flex gap-1.5 overflow-x-auto border-t border-slate-100 whitespace-nowrap scrollbar-none" style="-webkit-overflow-scrolling: touch;">
+            <button onclick="sendQuickReply('🏖️ Suggest hotels in Bali')" class="text-[10px] font-bold bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-100 transition shadow-xs">🏖️ Hotels in Bali</button>
+            <button onclick="sendQuickReply('🏙️ Tokyo 3-day plan')" class="text-[10px] font-bold bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-100 transition shadow-xs">🏙️ Tokyo Plan</button>
+            <button onclick="sendQuickReply('🧗 Adventure activity ideas')" class="text-[10px] font-bold bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-100 transition shadow-xs">🧗 Adventure Sights</button>
+        </div>
+        
+        <!-- Chat Input -->
+        <div class="p-3 border-t border-slate-200 bg-white">
+            <div class="flex items-center space-x-2">
+                <input type="text" placeholder="Type your message..." 
+                       class="flex-1 px-4 py-2 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-xs text-slate-800 bg-slate-50" 
+                       id="chatInput">
+                <button id="sendMessage" class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl flex items-center justify-center w-10 h-10 transition shadow">
+                    <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+            <p class="text-[9px] text-slate-400 mt-2 text-center">Powered by iQlipse Generative AI Engine</p>
+        </div>
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        // Global auth state variables
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        function handleSignOut() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            alert('Logged out successfully.');
+            window.location.reload();
+        }
+
+        // Initialize Dynamic Navbar elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const navAuth = document.getElementById('navAuthSection');
+            const mobileAuth = document.getElementById('mobileAuthSection');
+            
+            if (token && user) {
+                const userHtml = `
+                    <div class="flex items-center space-x-3">
+                        <a href="dashboard.html" class="flex items-center space-x-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 px-3 rounded-xl transition">
+                            <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs shadow-inner">
+                                ${user.name.charAt(0).toUpperCase()}
+                            </div>
+                            <span class="text-xs font-bold text-slate-700">${user.name}</span>
+                        </a>
+                        <button onclick="handleSignOut()" class="text-xs font-semibold text-red-500 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-xl transition">
+                            Logout
+                        </button>
+                    </div>
+                `;
+                navAuth.innerHTML = userHtml;
+                mobileAuth.innerHTML = `
+                    <div class="py-2 text-slate-800 font-bold">Hello, ${user.name}</div>
+                    <a href="dashboard.html" class="block py-2 text-blue-600 font-semibold">My Dashboard</a>
+                    <button onclick="handleSignOut()" class="w-full text-left py-2 text-red-500">Logout</button>
+                `;
+            }
+
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Initialize Budget Calculator
+            updateCalculator();
+        });
+
+        // ---------- SEARCH DIRECT REDIRECTION ----------
+        function triggerHeroSearch() {
+            const dest = document.getElementById('heroSearchDest').value.trim();
+            if (!dest) {
+                alert('Please enter a destination name.');
+                return;
+            }
+            window.location.href = `map.html?search=${encodeURIComponent(dest)}`;
+        }
+
+        // ---------- BUDGET CALCULATOR LOGIC ----------
+        let currentCalcPref = 'Beach';
+        let currentCalcMultiplier = 1.1;
+        let currentCalcRate = 180;
+        let currentCalcFlight = 750;
+        let currentCalcTier = 'Comfort';
+
+        function setCalcPref(pref, mult, btn) {
+            currentCalcPref = pref;
+            currentCalcMultiplier = mult;
+            
+            document.querySelectorAll('.calc-pref-btn').forEach(b => {
+                b.classList.remove('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+                b.classList.add('border-slate-200', 'text-slate-700');
+            });
+            btn.classList.add('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+            btn.classList.remove('border-slate-200', 'text-slate-700');
+            
+            updateCalculator();
+        }
+
+        function setCalcTier(tier, rate, flight, btn) {
+            currentCalcTier = tier;
+            currentCalcRate = rate;
+            currentCalcFlight = flight;
+            
+            document.querySelectorAll('.calc-tier-btn').forEach(b => {
+                b.classList.remove('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+                b.classList.add('border-slate-200', 'text-slate-700');
+            });
+            btn.classList.add('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+            btn.classList.remove('border-slate-200', 'text-slate-700');
+            
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const days = parseInt(document.getElementById('calcDaysSlider').value);
+            document.getElementById('calcDaysDisplay').innerText = `${days} Day${days > 1 ? 's' : ''}`;
+            
+            // Formula: FlightCost + (DailyRate * Days * ThemeMultiplier)
+            const flightCost = currentCalcFlight;
+            const lodgingCost = Math.round(currentCalcRate * days * 0.7 * currentCalcMultiplier);
+            const foodActivities = Math.round(currentCalcRate * days * 0.5 * currentCalcMultiplier);
+            const total = flightCost + lodgingCost + foodActivities;
+            
+            document.getElementById('calcTotalDisplay').innerText = `$${total.toLocaleString()}`;
+            document.getElementById('calcLodgingCost').innerText = `$${lodgingCost.toLocaleString()}`;
+            document.getElementById('calcTransportCost').innerText = `$${flightCost.toLocaleString()}`;
+            document.getElementById('calcActivitiesCost').innerText = `$${foodActivities.toLocaleString()}`;
+        }
+
+        function bookCalculatedTrip() {
+            if (!token || !user) {
+                alert('Please sign in to generate and save travel plans with your preferences!');
+                window.location.href = 'sign.html';
+                return;
+            }
+            // If logged in, redirect to dashboard preloading the preference
+            localStorage.setItem('preloadedCalcDays', document.getElementById('calcDaysSlider').value);
+            localStorage.setItem('preloadedCalcBudget', currentCalcTier + ' Plan');
+            localStorage.setItem('preloadedCalcPref', currentCalcPref);
+            window.location.href = 'dashboard.html';
+        }
+
+        // ---------- FLOATING CHATBOT INTERACTIVES ----------
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const closeChatbot = document.getElementById('closeChatbot');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Toggle chatbot container
+        chatbotButton.addEventListener('click', () => {
+            if (chatbotContainer.classList.contains('hidden')) {
+                chatbotContainer.classList.remove('hidden');
+                setTimeout(() => {
+                    chatbotContainer.classList.remove('scale-95', 'opacity-0');
+                    chatbotContainer.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                
+                // Fetch chats if logged in and empty
+                if (token && chatMessages.children.length <= 1) {
+                    loadChatHistory();
+                }
+            } else {
+                closeChatbox();
+            }
+        });
+
+        function closeChatbox() {
+            chatbotContainer.classList.remove('scale-100', 'opacity-100');
             chatbotContainer.classList.add('scale-95', 'opacity-0');
             setTimeout(() => {
                 chatbotContainer.classList.add('hidden');
             }, 300);
         }
-    });
-    
-    closeChatbot.addEventListener('click', () => {
-        chatbotContainer.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            chatbotContainer.classList.add('hidden');
-        }, 300);
-    });
-    
-    // Add message to chat
-    function addMessage(text, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`;
-        
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        messageDiv.innerHTML = `
-            <div class="${isUser ? 'bg-blue-600 text-white' : 'bg-white'} p-3 rounded-lg shadow max-w-xs">
-                <p>${text}</p>
-                <p class="text-xs ${isUser ? 'text-blue-100' : 'text-gray-500'} mt-1">${timeString}</p>
-            </div>
-        `;
-        
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-    
-    // Send message to API
-    async function sendToAPI(message) {
-        // Replace with your actual API endpoint
-        const API_URL = 'https://your-api-endpoint.com/chat';
-        
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_API_KEY' // Add your API key here
-                },
-                body: JSON.stringify({
-                    message: message,
-                    context: 'travel_assistant' // Add any context if needed
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error('API request failed');
-            }
-            
-            const data = await response.json();
-            return data.response;
-            
-        } catch (error) {
-            console.error('Error calling API:', error);
-            return "I'm having trouble connecting to our servers. Please try again later or contact support at help@powerbedtravel.com";
-        }
-    }
-    
-    // Handle message sending
-    async function handleSendMessage() {
-        const message = chatInput.value.trim();
-        if (!message) return;
-        
-        // Add user message
-        addMessage(message, true);
-        chatInput.value = '';
-        
-        // Show typing indicator
-        const typingIndicator = document.createElement('div');
-        typingIndicator.className = 'flex mb-4 justify-start';
-        typingIndicator.innerHTML = `
-            <div class="bg-white p-3 rounded-lg shadow max-w-xs">
-                <div class="flex space-x-1">
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+
+        closeChatbot.addEventListener('click', closeChatbox);
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex mb-2 ${isUser ? 'justify-end' : 'justify-start'}`;
+            messageDiv.innerHTML = `
+                <div class="${isUser ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-slate-700 rounded-tl-none border border-slate-150'} p-3 rounded-2xl shadow-xs max-w-[85%] text-xs leading-relaxed">
+                    <p>${text}</p>
                 </div>
-            </div>
-        `;
-        chatMessages.appendChild(typingIndicator);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        // Get AI response (in real app, you would call your API here)
-        // For demo, we'll simulate an API call
-        try {
-            // In production, you would use:
-            // const aiResponse = await sendToAPI(message);
-            // For demo, we'll simulate a response:
-            const aiResponse = await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve(getSimulatedResponse(message));
-                }, 1500);
-            });
-            
-            // Remove typing indicator
-            typingIndicator.remove();
-            
-            // Add AI response
-            addMessage(aiResponse, false);
-            
-        } catch (error) {
-            typingIndicator.remove();
-            addMessage("Sorry, I encountered an error. Please try again.", false);
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-    }
-    
-    // Simulated responses for demo
-    function getSimulatedResponse(message) {
-        const responses = [
-            "I can help you with travel recommendations! Based on your preferences, I suggest Bali for beaches or Tokyo for city experiences.",
-            "For your travel needs, we have special deals to Paris and Santorini this month. Would you like more details?",
-            "I recommend 7-10 days for a fulfilling vacation. Our AI can create a personalized itinerary if you'd like!",
-            "Based on current trends, many travelers are enjoying destinations like Switzerland and New Zealand this season.",
-            "I can assist with booking flights, hotels, and activities. What specifically are you looking for?"
-        ];
-        return responses[Math.floor(Math.random() * responses.length)];
-    }
-    
-    // Event listeners
-    sendMessage.addEventListener('click', handleSendMessage);
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSendMessage();
-    });
-    
-    // Initial greeting
-    setTimeout(() => {
-        addMessage("Welcome to PowerBed Travel! I can help you find perfect destinations, book trips, and answer any travel questions.", false);
-    }, 500);
-});
-</script>
+
+        async function loadChatHistory() {
+            try {
+                const response = await fetch(`/api/chat/history?destName=General`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                if (response.ok && data.chat && data.chat.messages && data.chat.messages.length > 0) {
+                    chatMessages.innerHTML = '';
+                    data.chat.messages.forEach(msg => {
+                        addMessage(msg.text, msg.sender === 'user');
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching chat history:', error);
+            }
+        }
+
+        async function handleSendMessage(customMsg = null) {
+            const text = (customMsg || chatInput.value).trim();
+            if (!text) return;
+            
+            addMessage(text, true);
+            chatInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'flex mb-2 justify-start';
+            typingIndicator.innerHTML = `
+                <div class="bg-white border border-slate-150 p-3 rounded-2xl rounded-tl-none shadow-xs text-xs text-slate-400">
+                    <div class="flex space-x-1 items-center">
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></div>
+                        <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            if (token) {
+                try {
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            message: text,
+                            destName: 'General'
+                        })
+                    });
+                    const data = await response.json();
+                    typingIndicator.remove();
+                    if (response.ok) {
+                        addMessage(data.reply, false);
+                    } else {
+                        addMessage("I am having issues parsing messages. Try again later.", false);
+                    }
+                } catch (error) {
+                    typingIndicator.remove();
+                    addMessage("Server connectivity issues encountered.", false);
+                }
+            } else {
+                // Mock responses for guests
+                setTimeout(() => {
+                    typingIndicator.remove();
+                    let reply = '';
+                    const lowerText = text.toLowerCase();
+                    if (lowerText.includes('bali')) {
+                        reply = "Bali is beautiful! Stays in beachfront eco-resorts start from $120/night. I recommend signing up to save full itineraries. 🏖️";
+                    } else if (lowerText.includes('tokyo')) {
+                        reply = "Tokyo packages are trending. A typical 3-day itinerary features Shibuya crossings, temple tours, and sushi guides. 🏙️";
+                    } else if (lowerText.includes('budget') || lowerText.includes('cost')) {
+                        reply = "Our daily plan estimations depend on style. Drag the slider on our Calculator widget to see lodging cost breakdowns! 💰";
+                    } else {
+                        reply = "Welcome to iQlipse Travel! Please Sign In to ask details about hotels, local activities, and save generated schedules. ✈️";
+                    }
+                    addMessage(reply, false);
+                }, 800);
+            }
+        }
+
+        function sendQuickReply(msgText) {
+            handleSendMessage(msgText);
+        }
+
+        sendMessage.addEventListener('click', () => handleSendMessage());
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSendMessage();
+        });
+    </script>
 </body>
 </html>

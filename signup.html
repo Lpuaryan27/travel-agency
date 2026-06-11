@@ -4,118 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Travel with iQlipse</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#0F172A',
+                        light: '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Graphics Side (Left) -->
-        <div class="graphics-side">
-            <div class="overlay"></div>
-            <div class="content">
-                <h1>AI-Powered Travel Planning</h1>
-                <p>Register today and let our smart algorithms design your custom, stress-free dream vacation in seconds.</p>
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-route"></i>
-                        <span>Smart Day-by-Day Itineraries</span>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center hero-bg p-4 sm:p-6 lg:p-8">
+    <!-- Main Card Container -->
+    <div class="glass-panel w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row transition-all duration-300 transform hover:scale-[1.005]">
+        
+        <!-- Left Side: Interactive Graphics Banner (Hidden on small screens) -->
+        <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-600/90 to-indigo-900/95 p-12 text-white flex-col justify-between relative overflow-hidden">
+            <!-- Decorative Light Blobs -->
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-400/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-60 h-60 bg-teal-400/20 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <a href="tavel.html" class="flex items-center space-x-2 text-2xl font-bold tracking-tight">
+                    <i class="fas fa-bed text-teal-300"></i>
+                    <span class="bg-gradient-to-r from-teal-300 to-blue-200 bg-clip-text text-transparent">iQlipse Travel</span>
+                </a>
+            </div>
+            
+            <div class="my-auto relative z-10 space-y-6">
+                <h1 class="text-4xl font-extrabold leading-tight">AI-Powered Travel Planning</h1>
+                <p class="text-blue-100 text-lg leading-relaxed">
+                    Create a free account today and let our smart algorithms design your custom, stress-free dream vacation in seconds.
+                </p>
+                
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-route"></i></div>
+                        <span class="font-medium text-slate-100">Smart Day-by-Day Itineraries</span>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-hotel"></i>
-                        <span>Exclusive Local Deals</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-hotel"></i></div>
+                        <span class="font-medium text-slate-100">Exclusive Local Hotel Deals</span>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Interactive Map Routing</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-map-marked-alt"></i></div>
+                        <span class="font-medium text-slate-100">Interactive Map Routing</span>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-comments"></i>
-                        <span>24/7 AI Concierge Support</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-comments"></i></div>
+                        <span class="font-medium text-slate-100">24/7 AI Concierge Support</span>
                     </div>
                 </div>
+            </div>
+            
+            <div class="relative z-10 text-xs text-blue-200">
+                &copy; 2026 iQlipse Inc. All rights reserved.
             </div>
         </div>
 
-        <!-- Signup Form Side (Right) -->
-        <div class="signup-side">
-            <div class="logo">
-                <i class="fas fa-bed"></i>
-                <span>Travel with iQlipse</span>
+        <!-- Right Side: Signup Form -->
+        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center bg-white/95">
+            <!-- Small logo for mobile -->
+            <div class="flex md:hidden items-center space-x-2 text-xl font-bold mb-6 text-slate-800">
+                <i class="fas fa-bed text-blue-600"></i>
+                <span>iQlipse Travel</span>
             </div>
             
-            <h2>Get Started</h2>
-            <p class="subtitle">Create a free account to access custom itineraries.</p>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">Create Account</h2>
+                <p class="text-slate-500">Plan and save your dream travel itineraries for free.</p>
+            </div>
             
-            <!-- Social Signup Buttons -->
-            <div class="social-login">
-                <button class="social-btn google">
-                    <i class="fab fa-google"></i>
-                    Sign up with Google
+            <!-- Social Buttons -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button class="social-btn google flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-sm text-slate-700 bg-white">
+                    <i class="fab fa-google text-red-500"></i> Google
                 </button>
-                <button class="social-btn facebook">
-                    <i class="fab fa-facebook-f"></i>
-                    Sign up with Facebook
+                <button class="social-btn facebook flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-sm text-slate-700 bg-white">
+                    <i class="fab fa-facebook-f text-blue-600"></i> Facebook
                 </button>
             </div>
             
-            <div class="divider">Or register with email</div>
+            <!-- Divider -->
+            <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="px-4 text-xs font-semibold uppercase tracking-wider text-slate-400 bg-transparent">Or register with email</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
             
-            <!-- Signup Form -->
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="fullname" placeholder="John Doe" required>
+            <!-- Form -->
+            <form id="signupForm" class="space-y-4">
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="fullname" placeholder="John Doe" required
+                               class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800">
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" placeholder="john@example.com" required>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="email" id="email" placeholder="john@example.com" required
+                               class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800">
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="••••••••" required>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="password" id="password" placeholder="••••••••" required
+                               class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800">
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="travelPreference">Travel Preference</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-plane"></i>
-                        <select id="travelPreference">
+                <div>
+                    <label for="travelPreference" class="block text-sm font-medium text-slate-700 mb-1">Travel Style Preference</label>
+                    <div class="relative">
+                        <i class="fas fa-plane absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <select id="travelPreference"
+                                class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800 appearance-none">
                             <option value="Adventure">🧗 Adventure & Outdoors</option>
                             <option value="Beach">🏖️ Beach & Relaxation</option>
                             <option value="City">🏙️ City & Culture</option>
                             <option value="Mountain">⛰️ Mountain & Hiking</option>
                             <option value="General">🌍 General Explorer</option>
                         </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
                     </div>
                 </div>
                 
-                <div class="terms">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                <div class="flex items-start gap-2 pt-2">
+                    <input type="checkbox" id="terms" required class="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                    <label for="terms" class="text-sm text-slate-500">
+                        I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+                    </label>
                 </div>
                 
-                <button type="submit" class="signup-btn">
+                <button type="submit" class="signup-btn w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-4">
                     <i class="fas fa-user-plus"></i> Create Account
                 </button>
             </form>
             
-            <p class="login-link">
-                Already have an account? <a href="sign.html">Sign In</a>
+            <p class="login-link text-center text-sm text-slate-500 mt-6">
+                Already have an account? <a href="sign.html" class="text-blue-600 font-bold hover:underline">Sign In</a>
             </p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

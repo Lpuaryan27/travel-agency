@@ -236,6 +236,38 @@
             fetchTrips();
             fetchChatHistory();
 
+            // Check for preloaded calculator parameters from the homepage
+            const preloadedDays = localStorage.getItem('preloadedCalcDays');
+            const preloadedBudget = localStorage.getItem('preloadedCalcBudget');
+            const preloadedPref = localStorage.getItem('preloadedCalcPref');
+
+            if (preloadedDays || preloadedBudget || preloadedPref) {
+                if (preloadedBudget) {
+                    const budgetSelect = document.getElementById('plannerBudget');
+                    if (budgetSelect) {
+                        budgetSelect.value = preloadedBudget;
+                    }
+                }
+                
+                const today = new Date();
+                const checkInDate = new Date(today.setDate(today.getDate() + 14));
+                const checkInStr = checkInDate.toISOString().split('T')[0];
+                
+                const checkOutDate = new Date(checkInDate.setDate(checkInDate.getDate() + parseInt(preloadedDays || 7)));
+                const checkOutStr = checkOutDate.toISOString().split('T')[0];
+                
+                const checkInInput = document.getElementById('plannerCheckIn');
+                const checkOutInput = document.getElementById('plannerCheckOut');
+                
+                if (checkInInput) checkInInput.value = checkInStr;
+                if (checkOutInput) checkOutInput.value = checkOutStr;
+                
+                // Clear preloaded items
+                localStorage.removeItem('preloadedCalcDays');
+                localStorage.removeItem('preloadedCalcBudget');
+                localStorage.removeItem('preloadedCalcPref');
+            }
+
             // Setup Logout
             document.getElementById('logoutBtn').addEventListener('click', () => {
                 localStorage.removeItem('token');
@@ -397,7 +429,7 @@
         // Fetch User Chat History
         async function fetchChatHistory() {
             try {
-                const response = await fetch('/api/chat/history', {
+                const response = await fetch('/api/chat/history?destName=your%20custom%20trip', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await response.json();

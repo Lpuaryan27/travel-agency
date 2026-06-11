@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - Travel with iQlipse</title>
+    <!-- Tailwind CSS + Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -13,7 +14,7 @@
                     colors: {
                         primary: '#3B82F6',
                         secondary: '#10B981',
-                        dark: '#1E293B',
+                        dark: '#0F172A',
                         light: '#F8FAFC',
                     }
                 }
@@ -21,155 +22,143 @@
         }
     </script>
     <style>
-        .auth-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1519&q=80');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
         }
-        
-        .auth-container {
-            backdrop-filter: blur(8px);
-        }
     </style>
 </head>
-<body class="font-sans bg-light">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="tavel.html" class="flex items-center">
-                            <i class="fas fa-bed text-primary text-2xl mr-2"></i>
-                            <span class="text-xl font-bold text-dark">Travel with iQlipse</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    
-                    <div class="-mr-2 flex items-center md:hidden">
-                        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile menu -->
-        <div class="hidden md:hidden" id="mobile-menu">
-            <div class="pt-2 pb-3 space-y-1">
-                <span class="block px-4 py-2 text-gray-600">Don't have an account?</span>
-                <a href="signup.html" class="block bg-gray-100 text-dark border border-gray-300 px-4 py-2 mx-4 rounded-md text-sm font-medium">Sign Up</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="auth-bg min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="auth-container bg-white bg-opacity-90 max-w-md w-full p-8 rounded-lg shadow-xl">
-            <div class="text-center">
-                <i class="fas fa-bed text-primary text-4xl mb-4"></i>
-                <h2 class="text-3xl font-bold text-dark mb-2">Sign In to  iQlipse</h2>
-                <p class="text-gray-600 mb-8">Access your AI-powered travel planner and saved trips</p>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center hero-bg p-4 sm:p-6 lg:p-8">
+    <!-- Main Card Container -->
+    <div class="glass-panel w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row transition-all duration-300 transform hover:scale-[1.005]">
+        
+        <!-- Left Side: Interactive Graphics Banner (Hidden on small screens) -->
+        <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-600/90 to-indigo-900/95 p-12 text-white flex-col justify-between relative overflow-hidden">
+            <!-- Decorative Light Blobs -->
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-400/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-60 h-60 bg-teal-400/20 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <a href="tavel.html" class="flex items-center space-x-2 text-2xl font-bold tracking-tight">
+                    <i class="fas fa-bed text-teal-300"></i>
+                    <span class="bg-gradient-to-r from-teal-300 to-blue-200 bg-clip-text text-transparent">iQlipse Travel</span>
+                </a>
             </div>
             
-            <!-- Social Login Buttons -->
-            <div class="mb-6">
-                <div class="grid grid-cols-2 gap-4">
-                    <button class="bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center">
-                        <i class="fab fa-google text-red-500 mr-2"></i>
-                        Google
-                    </button>
-                    <button class="bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center">
-                        <i class="fab fa-facebook-f text-blue-600 mr-2"></i>
-                        Facebook
-                    </button>
-                </div>
+            <div class="my-auto relative z-10 space-y-6">
+                <h1 class="text-4xl font-extrabold leading-tight">Welcome Back to iQlipse</h1>
+                <p class="text-blue-100 text-lg leading-relaxed">
+                    Sign in to access your saved itineraries, consult the AI Concierge, and manage your upcoming adventures.
+                </p>
                 
-                <div class="relative my-6">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-map-marked-alt"></i></div>
+                        <span class="font-medium text-slate-100">Review Interactive Custom Routes</span>
                     </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-history"></i></div>
+                        <span class="font-medium text-slate-100">Access Previous AI Chats & Stays</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fas fa-passport"></i></div>
+                        <span class="font-medium text-slate-100">Update Travel Preferences on the fly</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Sign In Form -->
-            <form class="space-y-6" id="signInForm">
+            <div class="relative z-10 text-xs text-blue-200">
+                &copy; 2026 iQlipse Inc. All rights reserved.
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center bg-white/95">
+            <!-- Small logo for mobile -->
+            <div class="flex md:hidden items-center space-x-2 text-xl font-bold mb-6 text-slate-800">
+                <i class="fas fa-bed text-blue-600"></i>
+                <span>iQlipse Travel</span>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">Sign In</h2>
+                <p class="text-slate-500">Access your personalized AI travel planner.</p>
+            </div>
+            
+            <!-- Social Buttons -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button class="social-btn google flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-sm text-slate-700 bg-white">
+                    <i class="fab fa-google text-red-500"></i> Google
+                </button>
+                <button class="social-btn facebook flex items-center justify-center gap-2 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-sm text-slate-700 bg-white">
+                    <i class="fab fa-facebook-f text-blue-600"></i> Facebook
+                </button>
+            </div>
+            
+            <!-- Divider -->
+            <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="px-4 text-xs font-semibold uppercase tracking-wider text-slate-400 bg-transparent">Or continue with</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+            
+            <!-- Form -->
+            <form id="signInForm" class="space-y-4">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                    <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-envelope text-gray-400"></i>
-                        </div>
-                        <input id="email" name="email" type="email" autocomplete="email" required class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="you@example.com">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required
+                               class="w-full pl-11 pr-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800">
                     </div>
                 </div>
                 
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <a href="forgot-password.html" class="text-sm text-primary hover:text-blue-700">Forgot password?</a>
+                        <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
+                        <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
                     </div>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary" placeholder="••••••••">
-                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                            <i class="fas fa-eye text-gray-400 hover:text-gray-500"></i>
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required
+                               class="w-full pl-11 pr-12 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white/50 text-slate-800">
+                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                            <i class="fas fa-eye text-slate-400 hover:text-slate-500"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="flex items-center">
-                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
-                    <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                <div class="flex items-center justify-between pt-2">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="remember-me" name="remember-me" class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+                        <label for="remember-me" class="text-sm text-slate-500">Remember me</label>
+                    </div>
                 </div>
                 
-                <div>
-                    <button type="submit" class="w-full bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-md font-medium flex items-center justify-center">
-                        <span id="buttonText">Sign In</span>
-                        <svg id="buttonSpinner" class="hidden animate-spin -mr-1 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                    </button>
-                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-4">
+                    <span id="buttonText">Sign In</span>
+                    <svg id="buttonSpinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
             </form>
             
-            <div class="mt-6 text-center">
-                <p class="text-gray-600">Don't have an account? <a href="signup.html" class="text-primary hover:text-blue-700 font-medium">Sign up</a></p>
-            </div>
+            <p class="text-center text-sm text-slate-500 mt-6">
+                Don't have an account yet? <a href="signup.html" class="text-blue-600 font-bold hover:underline">Sign up</a>
+            </p>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center mb-4 md:mb-0">
-                    <i class="fas fa-bed text-primary text-xl mr-2"></i>
-                    <span class="text-lg font-bold">Travel with iQlipse</span>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Help Center</a>
-                </div>
-            </div>
-            <div class="mt-6 text-center md:text-left">
-                <p class="text-gray-400 text-sm">© 2025 Travel with iQlipse. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+    </div>
     <script src="signin.js"></script>
 </body>
 </html>
