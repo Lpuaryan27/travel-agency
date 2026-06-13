@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Compass, Calendar, Gem, Search, Route, Shield, Globe, Star, MapPin, Tag } from 'lucide-react';
+import { Compass, Calendar, Gem, Search, Route, Shield, Globe, Star, MapPin } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();

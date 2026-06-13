@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Search, MapPin, Tag, Clock, Compass, Star, Sparkles, Headset, XCircle, Heart, CloudRain, Thermometer, Wind } from 'lucide-react';
+import { Search, MapPin, Tag, Clock, Compass, Star, Sparkles, Headset, XCircle, Heart, CloudRain, Thermometer, Wind, Globe } from 'lucide-react';
 
 const destinations = [
   { 
@@ -285,7 +285,9 @@ export default function MapView({ onOpenChatContext }) {
     try {
       const stored = localStorage.getItem('favorites');
       favs = stored ? JSON.parse(stored) : [];
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
 
     if (favs.includes(selectedDest.name)) {
       favs = favs.filter(f => f !== selectedDest.name);

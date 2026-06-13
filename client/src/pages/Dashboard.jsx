@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Briefcase, Sparkles, LogOut, Map, Eye, Trash2, Send, HelpCircle, Loader2, Award, Calendar, CheckCircle, Mic, MicOff, Star, Heart, FileText, Download, Edit3, Clock, Thermometer, CloudRain, Wind, Tag, ListTodo, Phone } from 'lucide-react';
+import { Briefcase, Sparkles, Map, Eye, Trash2, Send, Loader2, Award, Calendar, CheckCircle, Mic, MicOff, Heart, FileText, Download, Edit3, Clock, Thermometer, CloudRain, Wind, Tag, ListTodo, Phone } from 'lucide-react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { user, token, logout, fetchWithAuth } = useAuth();
+  const { user, token, fetchWithAuth } = useAuth();
   
   // Redirect if guest
   useEffect(() => {

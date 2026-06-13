@@ -20,7 +20,7 @@ export default function Chatbot({ chatContext, setChatContext }) {
   }, [chatContext]);
 
   // Load chat history
-  const loadHistory = async (destName) => {
+  async function loadHistory(destName) {
     if (!isAuthenticated) {
       setMessages([
         {

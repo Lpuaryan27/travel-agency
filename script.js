@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const fullname = document.getElementById('fullname').value;
             const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             const travelPreference = document.getElementById('travelPreference').value;
             
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({
                         name: fullname,
                         email: email,
+                        phone: phone,
                         password: password,
                         preference: travelPreference
                     })
